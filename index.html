@@ -1,0 +1,190 @@
+<html>
+<head>
+  <link href="https://fonts.googleapis.com/css?family=Questrial" rel="stylesheet">
+  <style>
+
+  *{
+    margin: 0;
+    padding: 0;
+  }
+
+  #ruta {
+    width: 350px;
+    height: 350px;
+    overflow: hidden;
+    margin-top: 45px;
+    margin-left: auto;
+    margin-right: auto;
+    align-self: center;
+  }
+
+  #knapphöger {
+    background-color: #DADEDD;
+    position: absolute;
+    right: 500;
+    width: 175px;
+
+  }
+
+  #knappvänster {
+    background-color: #DADEDD;
+    position: absolute;
+    left: 500;
+    width: 175px;
+  }
+
+  body {
+    background-color: #DADEDD;
+  }
+
+  h2 {
+    color: black;
+    font-family: 'Questrial', sans-serif;
+    font-weight: 600;
+    font-size: 35px;
+    margin-top: 15px;
+    text-align: center;
+  }
+
+  #bilder {
+    display: flex;
+    position: relative;
+    right: 1000px;
+  }
+
+  #dots {
+    width: 100%;
+    height: 12px;
+    text-align: center;
+  }
+
+  .dot {
+    width: 12px;
+    height: 12px;
+    display: inline-block;
+    border-radius: 50%;
+    background: white;
+    opacity: 0.5;
+    margin: 90 10px;
+  }
+
+  </style>
+</head>
+
+<body>
+
+  <title> Slider </title>
+
+  <div id="ruta">
+    <div id="bilder">
+      <img id="bild1" src="Bild2.jpg">
+      <img id="bild2" src="Bild3.jpg">
+      <img id="bild3" src="Bild1.jpg">
+      <img id="bild4" src="Bild2.jpg">
+      <img id="bild5" src="Bild3.jpg">
+    </div>
+  </div>
+
+  <button id="knapphöger" class="closing"><h2> HÖGER </h2></button>
+  <button id="knappvänster" class="closing"><h2> VÄNSTER </h2></button>
+
+  <div id="dots"><div class="dot"></div><div class="dot"></div><div class="dot"></div></div>
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+  <script>
+
+  $(document).ready(function() {
+
+  });
+
+  var bildatm = 3;
+  var auto;
+  $("#knapphöger").click(function() {
+    clearInterval(auto);
+    $("#bilder").animate({left: "-=500px"}, 1000,);
+    bildatm++;
+    console.log(bildatm);
+    if(bildatm === 5){
+      $("#bilder").animate({left: "+=1500px"}, 0);
+      bildatm = 2;
+    }
+  });
+
+  $("#knappvänster").click(function() {
+    clearInterval(auto);
+    $("#bilder").animate({left: "+=500px"}, 1000);
+    bildatm--;
+    if(bildatm === 1){
+      $("#bilder").animate({left: "-=1500px"}, 0);
+      bildatm =4;
+    }
+  });
+
+  var prev = document.getElementById("knappvänster");
+  var next = document.getElementById("knapphöger");
+  var bilder = document.getElementById("bilder");
+  var bildnodes = bilder.childNodes;
+
+  var dots = document.getElementById("dots");
+  var dot = document.getElementsByClassName("dot");
+  var dotnodes = dots.childNodes;
+
+
+  var nu = 1;
+
+
+  dotnodes[0].style.opacity = 1;
+  dotnodes[1].style.opacity = 0.5;
+  dotnodes[2].style.opacity = 0.5;
+
+
+  next.onclick = function(){
+
+    console.log("höger");
+    if(nu == 1){
+      nu=2;
+      dotnodes[0].style.opacity = 0.5;
+      dotnodes[1].style.opacity = 1;
+      dotnodes[2].style.opacity = 0.5;
+    }
+
+    else if (nu == 2) {
+      nu = 3;
+      dotnodes[0].style.opacity = 0.5;
+      dotnodes[1].style.opacity = 0.5;
+      dotnodes[2].style.opacity = 1;
+    }
+
+    else {
+      nu = 1;
+      dotnodes[0].style.opacity = 1;
+      dotnodes[1].style.opacity = 0.5;
+      dotnodes[2].style.opacity = 0.5;
+    }};
+
+    prev.onclick = function(){
+      if(nu == 1){
+        nu = 3;
+        dotnodes[0].style.opacity = 0.5;
+        dotnodes[1].style.opacity = 0.5;
+        dotnodes[2].style.opacity = 1;
+      }
+
+      else if (nu == 2) {
+        nu = 1;
+        dotnodes[0].style.opacity = 1;
+        dotnodes[1].style.opacity = 0.5;
+        dotnodes[2].style.opacity = 0.5;
+      }
+
+      else {
+        nu = 2;
+        dotnodes[0].style.opacity = 0.5;
+        dotnodes[1].style.opacity = 1;
+        dotnodes[2].style.opacity = 0.5;
+      }};
+
+      </script>
+    </body>
+    </html>
